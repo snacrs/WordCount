@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define all 100
+FILE *fp;
+void num_word(char *name_file)
+{		
+	int num=0;
+	char c;
+	if((fp=fopen(name_file,"r"))==NULL)
+	{
+	    printf("failed");
+		exit(0);
+	}
+    while(!feof(fp))
+    {
+	   	c=fgetc(fp);
+	   	if(c==' '||c==',')
+		 	num++;
+	}
+	num++;
+	fclose(fp);
+	printf("单词数：%d\n",num);
+}
+void num_char(char *name_file)
+{	
+	int num=0;
+	char c;
+	if((fp=fopen(name_file,"r"))==NULL)
+	{
+	    printf("failed");
+		exit(0);
+	}
+	while(!feof(fp))
+    {
+	   	c=fgetc(fp);
+	   	if(c=='\n'||c=='\t'||c==' '||(c>='a'&&c<='z')||(c>='A'&&c<='Z'))
+		{
+			num++;
+		}
+	}
+		fclose(fp);
+		printf("字符数：%d\n",num);
+}					
+int  main()
+{
+	char choo[2];
+	char na[all];
+	scanf("%s", &choo);
+	scanf("%s", &na);
+    if(!strcmp(choo,"-w"))
+		num_word(na);
+	else if(!strcmp(choo,"-c"))
+		num_char(na);
+	return 0;
+}
